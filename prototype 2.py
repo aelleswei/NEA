@@ -14,8 +14,6 @@ class State():
 
 
 
-
-
 	
 game_running = True
 
