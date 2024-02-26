@@ -12,14 +12,15 @@ class StartScreen():
 
 		def run(self):
 
-			
+			pygame.mouse.set_visible(True)
+
 			clock.tick(FPS)
 			
 			win.fill((COLOUR))
 
 			s_clicked = self.start_button.draw()
 			if s_clicked:
-				self.state = 'main'
+				self.state = 'select'
 
 			e_clicked = self.exit_button.draw()
 			if e_clicked:

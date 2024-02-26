@@ -18,6 +18,8 @@ class OptionsMenu():
 		b_clicked = self.back_button.draw()
 		if b_clicked:
 			self.state = 'start'
+			
+		
 
 		
 
