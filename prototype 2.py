@@ -6,6 +6,7 @@ from LevelCreator import LevelCreator
 from MainGame import MainGame
 from AutoLevelCreator import AutoLevelCreator
 from CreatorSelect import CreatorSelect
+from level2 import plain
 pygame.init()
 
 
@@ -15,7 +16,24 @@ class State():
 	def __init__(self):
 		self.state = 'start'
 		self.previous_state = None
+		self.changed = False
+		self.base_plain = [
 
+
+["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["p","","","","","","","","","","","","","","","","","","","d"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+
+]
 
 
 	
@@ -51,6 +69,9 @@ while game_running:
 		state.state = creator_select.state
 		
 	elif state.state == 'main':
+		if state.changed:
+			main_game = MainGame()
+		state.changed = False
 		main_game.run(state.previous_state)
 		state.state = main_game.state
 		
@@ -60,29 +81,42 @@ while game_running:
 
 		
 	elif state.state == 'manual':
+		if state.changed:
+			level_creator = LevelCreator()
+			
 		level_creator.state = "manual"
 		#level_creator = LevelCreator()
 		state.previous_state = 'manual'
 		#level_creator = LevelCreator()
 		level_creator.run()
 		state.state = level_creator.state
+		if level_creator.state == "main":
+			state.changed = True
 	
 	elif state.state == 'auto':
+		if state.changed:
+			auto_creator = AutoLevelCreator()
+			auto_creator.plain = state.base_plain
 		auto_creator.state = "auto"
+		state.changed = True
 		state.previous_state = 'auto'
 		#auto_creator = AutoLevelCreator()
 		auto_creator.run()
 		#state.state = auto_creator.state
 		state.state = auto_creator.state
-		if auto_creator.state == "main":
-			main_game.state = "main"
-	clock.tick(FPS)
-	print(f"CURRENT STATE IS {state.state}, {main_game.state}")
+		
 
+	
+		
+	clock.tick(FPS)
+	#print(f"CURRENT STATE IS {state.state}, MAIN GAME STATE IS {main_game.state}")
+	#print(state.base_plain)
+	#print(state.changed)
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			game_running = False
 
 
+	
 EXIT()

@@ -136,6 +136,7 @@ class Player(pygame.sprite.Sprite):
 			if name == "DOOR":
 				pass
 				#print("FINISHED")
+				self.collided_with_door = True
 			if xv > 0:
 				self.rect.right = x_rect.left
 			elif xv < 0:
@@ -175,7 +176,7 @@ class Player(pygame.sprite.Sprite):
 	def update_health(self,bullet_group):
 		hit = self.detect_bullets(bullet_group)
 		if hit:
-			self.health -= 1
+			self.health -= 0.5
 	
 		
 		

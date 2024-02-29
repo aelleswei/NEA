@@ -14,7 +14,10 @@ class AutoLevelCreator(LevelCreator):
         self.place_list = ["B","Bm","Bd","Bi","E","Er","Es"]
         self.special_place_list = ["Bm","Bd","Bi","Er","Es"]
         
+
+        
     def run(self):
+  
         self.plain_adjacency_dict = self.create_adjacency_dict(plain,self.plain_adjacency_dict)
         print("GENERATING LEVEL...")
         

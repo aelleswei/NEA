@@ -1,4 +1,3 @@
-from calendar import c
 import pygame
 from player_prototype import Player
 from settings2 import *
@@ -12,6 +11,15 @@ from math import sqrt
 # 	run the bfs
 # 	output result
 # 	reset plain to what it was before
+
+
+# KNOWN ERRORS:
+# for blocks that change position in the plain, 
+# when the player wins/loses and the plain resets, 
+# these blocks are not drawn properly on the level create screen. they cannot be deleted or replaced
+# they cannot be deleted or replaced 
+# they are drawn in their most recent position when the game is restarted
+# i cannot get the plain to reset itself on new levelcreator instance
 
 class LevelCreator():
 	def __init__(self):
@@ -42,8 +50,27 @@ class LevelCreator():
 		self.dict_made = False
 		self.special_place_list = ["E","Er","Es","Bm","Bi","Bd"]
 		self.special_place_list_locations = []
-		
+		self.plain_base = [
 
+
+["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["p","","","","","","","","","","","","","","","","","","","d"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","","","","","","","","","","","","","","","","","","","B"],
+["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+
+]
+
+		
+	def reset_plain(self):
+		plain = self.plain_base
 
 	def create_adjacency_dict(self,plain,dict):
 		for i in range(len(plain)):
@@ -386,10 +413,11 @@ class LevelCreator():
 
 
 
-
+		#print(self.enemy_count)
 				
 
 		if self.first_draw == False:
+			self.reset_plain()
 			self.default_draw()
 			self.first_draw = True
 		

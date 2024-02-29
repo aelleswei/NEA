@@ -7,6 +7,11 @@ from block_new import *
 from Enemy import *
 from math import sqrt
 
+# KNOWN ERRORS:
+# the player can interact with a moveableblock in a certain way that causes the player to be teleported into the wall, causing the game to softlock.
+# enemies sometimes interacting with a moving MoveableBlock in a certain way that causes them to teleport to a different position, 
+# this causes the enemy to seemingly become invincible.
+
 class MainGame():
 	def __init__(self):
 		self.state = "main"
@@ -60,7 +65,7 @@ class MainGame():
 		mouse = pygame.mouse.get_pos()
 		clock.tick(FPS)
 		win.blit(self.bg,(0,0))
-		
+		enemy_count = len(self.all_enemy_group)
 		
 		
 	
@@ -98,7 +103,14 @@ class MainGame():
 		if self.player.health <= 0:
 			self.state = state
 			pygame.time.wait(100)
-			
+		
+
+		if self.player.collided_with_door and enemy_count <= 0:
+			print("WIN")
+			self.state = state
+		
+		#rint(self.player.collided_with_door)
+		#print(enemy_count)
 		#print("MAIN GAME CURRENTLY RUNNING")
 		
 		#print("FPS:", int(clock.get_fps()))
