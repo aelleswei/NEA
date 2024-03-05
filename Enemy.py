@@ -51,8 +51,8 @@ class Enemy(Player,pygame.sprite.Sprite):
     
     def turning(self):
         
-        dx = self.rect.center[0] - self.player.rect[0]
-        dy = (self.rect.center[1] - self.player.rect[1]) *-1
+        dx = self.rect.center[0] - self.player.rect.center[0]
+        dy = (self.rect.center[1] - self.player.rect.center[1]) *-1
 			
         self.angle = (degrees(atan2(dy,dx)) + 180) 
 
@@ -72,8 +72,8 @@ class Enemy(Player,pygame.sprite.Sprite):
         hit = self.detect_bullets(bullet_group)
         if hit:
             self.health -= 1
-        if self.health < 1:
-            self.kill()
+    #     if self.health < 1:
+    #         self.kill()
      
     # def detect_bullets(self,bullet_group):
     #     bullet_hit_list = pygame.sprite.spritecollide(self,bullet_group,True)
@@ -92,6 +92,8 @@ class Enemy(Player,pygame.sprite.Sprite):
         self.turning()
         self.shooting()
         self.display_health_bar()
+        if self.health < 1:
+            self.kill()
 class Rush(Enemy):
     pass
 

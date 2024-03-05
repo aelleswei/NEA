@@ -31,19 +31,6 @@ class StartScreen():
 			if o_clicked:
 				self.state = 'opt'
 
-			
-				
-
-
-
-
-				
-
-				
-
-			
-
-
 
 
 			pygame.display.update()

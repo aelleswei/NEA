@@ -31,9 +31,8 @@ class Player(pygame.sprite.Sprite):
 		self.collided_with_door = False
 	
 	def display_health_bar(self):
-		#print(health_bar)
-		pygame.draw.rect(win,'red',(self.rect.centerx - 50, self.rect[1] - 50,100,25))
-		pygame.draw.rect(win,'green',(self.rect.centerx - 50,self.rect[1] - 50,self.health * 10,25))
+		pygame.draw.rect(win,'red',(self.rect.center[0] - 50, self.rect[1] - 50,100,25))
+		pygame.draw.rect(win,'green',(self.rect.center[0] - 50,self.rect[1] - 50,self.health * 10,25))
 		
 	def direction(self):
 		speed = 10

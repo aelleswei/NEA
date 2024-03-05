@@ -64,7 +64,7 @@ class MainGame():
 		keys = pygame.key.get_pressed()
 		mouse = pygame.mouse.get_pos()
 		clock.tick(FPS)
-		win.blit(self.bg,(0,0))
+		win.fill(COLOUR)
 		enemy_count = len(self.all_enemy_group)
 		
 		
@@ -101,8 +101,7 @@ class MainGame():
 		self.all_block_group.update(self.all_bullet_group)
 		
 		if self.player.health <= 0:
-			self.state = state
-			pygame.time.wait(100)
+			self.state = 'start'
 		
 
 		if self.player.collided_with_door and enemy_count <= 0:

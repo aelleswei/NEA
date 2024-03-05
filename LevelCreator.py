@@ -25,12 +25,12 @@ class LevelCreator():
 	def __init__(self):
 		self.block_group = pygame.sprite.Group()
 		self.block_selected = 0
-		self.current_tiles = ""
-		self.initial_drawn = False
+		#self.current_tiles = ""
+		#self.initial_drawn = False
 		self.bg = pygame.image.load('graphics/level-creator-bg.png')
-		self.player_count = 0
+		#self.player_count = 0
 		self.first_draw = False
-		self.old_plain = plain
+		#self.old_plain = plain
 		self.block_list = ['block','move','des','item']
 		self.block_dict = {'0':'B',
 		'1':'Bm',
@@ -42,7 +42,7 @@ class LevelCreator():
 		self.enemy_dict = {'0':'E',
 		'1':'Er',
 		'2':'Es'}
-		self.door_count = 0 
+		#self.door_count = 0 
 		self.plain_adjacency_dict = {}
 		self.state = 'manual'
 		self.enemy_count = 0
@@ -154,7 +154,7 @@ class LevelCreator():
 		mouse_rect.center = mouse
 		win.blit(mouse_img,mouse_rect.center)
 		
-	def player_valid(self,current):
+	def player_valid(self,current): #unused in current implementation. 
 		current = current
 			
 		array = self.check_around(current)
@@ -178,20 +178,21 @@ class LevelCreator():
 		array = self.check_around(current)
 			
 
-		for tile in array:
+		for tile in array: # I have absolutley no idea what any of this does. I think it was logic for not allowing blocks to be placed next to enemies, a rule that i removed.
 			valid = None
 			if plain[tile[1]][tile[0]] != "":
 				if plain[tile[1]][tile[0]] == 'p' or plain[tile[1]][tile[0]][0] == 'E':
 					valid = False
 					break
-		if plain[current[1]][current[0]] != "":	
+		if plain[current[1]][current[0]] != "":	#see line 181
 			if plain[current[1]][current[0]] == 'p' or plain[current[1]][current[0]][0] == 'E':
 				valid = False
 				
 
-		else:
+		else: #see line 181
 			valid = True
 
+		# i havent removed the above code because if i do it causes the entire function to not work. probably should have commented what it does beforehand
 
 		if valid == True:
 			if plain[current[1]][current[0]] == 'd':
@@ -417,7 +418,7 @@ class LevelCreator():
 				
 
 		if self.first_draw == False:
-			self.reset_plain()
+			self.reset_plain() #doesn't work for some reason.
 			self.default_draw()
 			self.first_draw = True
 		
